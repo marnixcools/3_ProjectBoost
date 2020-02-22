@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5324232330990352228}
   - component: {fileID: 3309796679003386087}
   - component: {fileID: 8086817994507845674}
-  - component: {fileID: 2216325750913120048}
   - component: {fileID: 1666739337}
   - component: {fileID: 1666739336}
   - component: {fileID: 2759061189019299714}
+  - component: {fileID: 1205518901}
   m_Layer: 0
   m_Name: NewRocket Ship
   m_TagString: Untagged
@@ -83,19 +83,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2216325750913120048
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3634754560570582292}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.8, y: 3.1898303, z: 1}
-  m_Center: {x: 0.01999998, y: 0.67008466, z: 0}
 --- !u!54 &1666739337
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104,13 +91,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3634754560570582292}
   serializedVersion: 2
-  m_Mass: 0.1
-  m_Drag: 0
+  m_Mass: 1
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!114 &1666739336
 MonoBehaviour:
@@ -124,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48156d4578dec754398100e0d4117187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rcsThrust: 300
+  mainThrust: 800
 --- !u!82 &2759061189019299714
 AudioSource:
   m_ObjectHideFlags: 0
@@ -138,7 +127,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -220,3 +209,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1205518901
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634754560570582292}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.804024, y: 3.12517, z: 1.819936}
+  m_Center: {x: 0, y: 0.69260395, z: 0}

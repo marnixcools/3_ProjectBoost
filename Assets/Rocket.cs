@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-
+    [SerializeField] float rcsThrust = 100.0f;
+    [SerializeField] float mainThrust = 100.0f;
     Rigidbody rigidbody;
     AudioSource locAudio;
     // Start is called before the first frame update
@@ -18,14 +19,31 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessInput(); 
+        Thrust();
+        Rotate(); 
     }
-
-    private void ProcessInput()
+    void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("friendly");
+                break;
+            case "Fuel":
+                print("Fuel");
+                break;
+            
+            default:
+                print("die");
+                break;
+        }
+    }
+    private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidbody.AddRelativeForce(Vector3.up);
+            float ThrustForceThisFrame = Time.deltaTime * mainThrust;
+            rigidbody.AddRelativeForce(Vector3.up * ThrustForceThisFrame);
 
 
         }
@@ -37,12 +55,22 @@ public class Rocket : MonoBehaviour
         {
             locAudio.Stop();
         }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            transform.Rotate(Vector3.forward);
-        }else if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(Vector3.back);
-        }
     }
+
+    private void Rotate()
+    {
+        rigidbody.freezeRotation = true;//take manual control of rotation
+        float RotationThisFrame = Time.deltaTime * rcsThrust;
+         if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(Vector3.forward * RotationThisFrame);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(Vector3.back * RotationThisFrame);
+        }
+        rigidbody.freezeRotation = false;//let physics take control again
+
+    }
+
 }
