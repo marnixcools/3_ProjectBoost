@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
     [SerializeField] float rcsThrust = 100.0f;
@@ -29,12 +26,16 @@ public class Rocket : MonoBehaviour
             case "Friendly":
                 print("friendly");
                 break;
-            case "Fuel":
-                print("Fuel");
+            case "Finish":
+                print("hit finish");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
                 break;
             
             default:
                 print("die");
+                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
                 break;
         }
     }
