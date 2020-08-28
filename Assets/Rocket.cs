@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem deadParticles;
     [SerializeField] ParticleSystem succesParticles;
 
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody = new Rigidbody();
     AudioSource audioSource;
 
     enum State { Alive, Dying, Transcending};
@@ -85,13 +86,17 @@ public class Rocket : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
+            print("in getkey");
             ApplyThrust();
 
         }
         else
         {
             audioSource.Stop();
-            mainParticles.Stop();
+            if (mainParticles.isPlaying) { 
+                mainParticles.Stop();
+            }
+            print("clled mainParticles.stop");
         }
 
     }
@@ -105,6 +110,7 @@ public class Rocket : MonoBehaviour
             audioSource.PlayOneShot(mainEngine);
         }
         mainParticles.Play();
+        print("mainParticles.play");
 
     }
 
