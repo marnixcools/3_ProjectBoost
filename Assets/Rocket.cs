@@ -5,9 +5,15 @@ public class Rocket : MonoBehaviour
     //SerializeField make variable visible in the inspector
     [SerializeField] float rcsThrust = 100.0f;
     [SerializeField] float mainThrust = 100.0f;
+    
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deadSound;
     [SerializeField] AudioClip succesSound;
+
+    [SerializeField] ParticleSystem mainParticles;
+    [SerializeField] ParticleSystem deadParticles;
+    [SerializeField] ParticleSystem succesParticles;
+
     Rigidbody rigidbody;
     AudioSource audioSource;
 
@@ -38,6 +44,7 @@ public class Rocket : MonoBehaviour
                 break;
             case "Finish":
                 StartSuccesSequence();
+                succesParticles.Play();
                 break;
             default:
                 StartDeadSeuence();
@@ -50,6 +57,7 @@ public class Rocket : MonoBehaviour
         state = State.Transcending;
         audioSource.Stop();
         audioSource.PlayOneShot(succesSound);
+        succesParticles.Play();
         Invoke("LoadNextLevel", 1f);
         //state = State.Alive;
     }
@@ -59,6 +67,7 @@ public class Rocket : MonoBehaviour
         state = State.Dying;
         audioSource.Stop();
         audioSource.PlayOneShot(deadSound);
+        deadParticles.Play();
         Invoke("LoadFirstLevel", 1f);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -82,6 +91,7 @@ public class Rocket : MonoBehaviour
         else
         {
             audioSource.Stop();
+            mainParticles.Stop();
         }
 
     }
@@ -94,6 +104,7 @@ public class Rocket : MonoBehaviour
         {
             audioSource.PlayOneShot(mainEngine);
         }
+        mainParticles.Play();
 
     }
 
