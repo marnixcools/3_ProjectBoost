@@ -41,7 +41,6 @@ public class Rocket : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Friendly":
-                print("friendly");
                 break;
             case "Finish":
                 StartSuccesSequence();
@@ -86,7 +85,6 @@ public class Rocket : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            print("in getkey");
             ApplyThrust();
 
         }
@@ -96,7 +94,6 @@ public class Rocket : MonoBehaviour
             if (mainParticles.isPlaying) { 
                 mainParticles.Stop();
             }
-            print("clled mainParticles.stop");
         }
 
     }
@@ -110,7 +107,6 @@ public class Rocket : MonoBehaviour
             audioSource.PlayOneShot(mainEngine);
         }
         mainParticles.Play();
-        print("mainParticles.play");
 
     }
 
