@@ -6,6 +6,7 @@ public class Rocket : MonoBehaviour
     //SerializeField make variable visible in the inspector
     [SerializeField] float rcsThrust = 100.0f;
     [SerializeField] float mainThrust = 100.0f;
+    [SerializeField] float levelLoadDelay = 2f;
     
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deadSound;
@@ -58,7 +59,7 @@ public class Rocket : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(succesSound);
         succesParticles.Play();
-        Invoke("LoadNextLevel", 1f);
+        Invoke("LoadNextLevel", levelLoadDelay);
         //state = State.Alive;
     }
 
@@ -68,7 +69,7 @@ public class Rocket : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(deadSound);
         deadParticles.Play();
-        Invoke("LoadFirstLevel", 1f);
+        Invoke("LoadFirstLevel", levelLoadDelay);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private  void LoadFirstLevel()

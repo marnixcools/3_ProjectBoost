@@ -311,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 421799798169669412, guid: d7a0b8ae929f8984bbdab4474c18edbf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.01
+      value: -15.38
       objectReference: {fileID: 0}
     - target: {fileID: 421799798169669412, guid: d7a0b8ae929f8984bbdab4474c18edbf,
         type: 3}
@@ -761,8 +761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138dc024f56bd8f4ea221a40d82ad08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Movement: {x: 0, y: 0, z: 0}
-  movementFactor: 0.315
+  movementVector: {x: 15, y: 0, z: 0}
+  movementRatio: 0.081
+  period: 2
 --- !u!4 &2016181288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 421799798169669412, guid: d7a0b8ae929f8984bbdab4474c18edbf,
