@@ -34,12 +34,12 @@ public class Rocket : MonoBehaviour
     void Update()
     {
         if (state == State.Alive) {
-            RespondToDebugKey();
+            RespondToRotateInput();
             RespondToThrustInput();
         }
         if (Debug.isDebugBuild)
         {
-            RespondToRotateInput();
+            RespondToDebugKey();
         }
 
     }
