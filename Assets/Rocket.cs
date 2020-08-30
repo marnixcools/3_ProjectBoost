@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
+
 public class Rocket : MonoBehaviour
 {
     //SerializeField make variable visible in the inspector
@@ -18,7 +20,7 @@ public class Rocket : MonoBehaviour
 
     new Rigidbody rigidbody = new Rigidbody();
     AudioSource audioSource;
-
+    bool collisionsAreDisabled = false;
     enum State { Alive, Dying, Transcending};
     [SerializeField] State state = State.Alive;
     // Start is called before the first frame update
@@ -31,14 +33,19 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state == State.Alive) { 
+        if (state == State.Alive) {
+            RespondToDebugKey();
             RespondToThrustInput();
+        }
+        if (Debug.isDebugBuild)
+        {
             RespondToRotateInput();
         }
+
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (state != State.Alive) {return;}
+        if (state != State.Alive || collisionsAreDisabled) {return;}
         switch (collision.gameObject.tag)
         {
             case "Friendly":
@@ -81,7 +88,25 @@ public class Rocket : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    private void RespondToDebugKey() {
+        if (Input.GetKeyDown(KeyCode.L)) {
+            LoadNextLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionsAreDisabled = !collisionsAreDisabled;
+            if (collisionsAreDisabled)
+            {
+                print("collisions are OFF");
+            }else
+            {
+                print("collisions ar ON");
+            }
+            
+        }
 
+        
+    }
     private void RespondToThrustInput()
     {
         if (Input.GetKey(KeyCode.Space))
